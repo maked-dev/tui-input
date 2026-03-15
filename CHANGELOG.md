@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-03-16
+
+### Fixed
+
+- Prevent crash when a stale `after-split-window` hook references dead panes
+- Companion pane now enforces minimum height (6 lines) on mount, ensuring usable input area on small terminals
+
+### Changed
+
+- Companion starts at 6 lines by default instead of 9, auto-grows on multi-line input
+
 ## [0.1.2] - 2026-03-16
 
 ### Added
@@ -34,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - One-liner install script with agent detection and alias registration
 - Key bindings: Enter (send), Shift+Enter (newline), Esc (clear), arrows (history)
 
-[Unreleased]: https://github.com/maked-dev/tui-input/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/maked-dev/tui-input/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/maked-dev/tui-input/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/maked-dev/tui-input/compare/v0.1.0...v0.1.2
 [0.1.0]: https://github.com/maked-dev/tui-input/releases/tag/v0.1.0

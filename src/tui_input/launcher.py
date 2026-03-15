@@ -11,11 +11,14 @@ from tui_input.tmux import (
     create_session_with_split,
     current_pane_id,
     in_tmux,
+    pane_height,
     set_hook,
     split_window,
 )
 
 COMPANION_HEIGHT = 9
+MIN_AGENT_HEIGHT = 10
+MIN_TOTAL_HEIGHT = COMPANION_HEIGHT + MIN_AGENT_HEIGHT
 SESSION_NAME = "tui-input"
 
 
@@ -44,6 +47,7 @@ def _find_tui_input_bin() -> str:
 def _launch_inside_tmux(command: str, tui_input_bin: str, companion_base: str) -> None:
     """Split the current tmux pane and launch companion in the bottom."""
     top_pane = current_pane_id()
+    _check_terminal_size(top_pane)
     companion_cmd = f"{companion_base} {top_pane}"
 
     # Split current pane: companion goes to the bottom.
@@ -77,6 +81,21 @@ def _launch_outside_tmux(command: str, companion_base: str) -> None:
         companion_command=companion_cmd,
         companion_height=COMPANION_HEIGHT,
     )
+
+
+def _check_terminal_size(pane_id: str) -> None:
+    """Verify the terminal is tall enough for agent + companion split.
+
+    Raises:
+        SystemExit: If the terminal height is below the minimum.
+    """
+    height = pane_height(pane_id)
+    if height < MIN_TOTAL_HEIGHT:
+        raise SystemExit(
+            f"Error: terminal too small ({height} lines). "
+            f"Minimum {MIN_TOTAL_HEIGHT} lines required.\n"
+            f"Resize your terminal window and try again."
+        )
 
 
 def _validate_command(executable: str) -> None:

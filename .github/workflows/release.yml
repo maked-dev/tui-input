@@ -51,3 +51,16 @@ jobs:
         with:
           files: dist/*
           generate_release_notes: true
+
+  homebrew:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mislav/bump-homebrew-formula-action@v3
+        with:
+          formula-name: tui-input
+          homebrew-tap: maked-dev/homebrew-tap
+          tag-name: ${{ github.ref_name }}
+          download-url: https://github.com/maked-dev/tui-input/archive/refs/tags/${{ github.ref_name }}.tar.gz
+        env:
+          COMMITTER_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}

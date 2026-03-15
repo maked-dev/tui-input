@@ -11,9 +11,17 @@ Screen {
     border: round $foreground 50%;
 }
 
-#stats {
+#statusbar {
     height: 1;
-    text-align: right;
     color: $text-muted;
     padding: 0 1;
+}
+
+#version {
+    width: auto;
+}
+
+#stats {
+    width: 1fr;
+    text-align: right;
 }

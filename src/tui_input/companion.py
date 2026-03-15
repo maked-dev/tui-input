@@ -10,8 +10,10 @@ from typing import TYPE_CHECKING, ClassVar
 
 from textual import on
 from textual.app import App, ComposeResult
+from textual.containers import Horizontal
 from textual.widgets import Static, TextArea
 
+from tui_input import __version__
 from tui_input.history import History
 from tui_input.tmux import (
     cancel_copy_mode,
@@ -359,7 +361,9 @@ class CompanionApp(App[None]):
 
     def compose(self) -> ComposeResult:
         yield InputArea(id="editor")
-        yield Static("0 chars · 0 bytes · ~0 tokens", id="stats")
+        with Horizontal(id="statusbar"):
+            yield Static(f"tui-input {__version__}", id="version")
+            yield Static("0 chars · 0 bytes · ~0 tokens", id="stats")
 
     def on_mount(self) -> None:
         editor = self.query_one("#editor", InputArea)

@@ -35,7 +35,7 @@ if TYPE_CHECKING:
 # Layout constants
 # ---------------------------------------------------------------------------
 
-MIN_HEIGHT = 9
+MIN_HEIGHT = 6
 MAX_HEIGHT = 14
 PROCESS_CHECK_INTERVAL = 0.3
 

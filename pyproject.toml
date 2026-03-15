@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "tui-input"
-version = "0.1.0"
+version = "0.1.1"
 description = "A terminal companion that pins a persistent input bar at the bottom of your tmux pane, so you can scroll freely through long TUI agent output while composing your response."
 readme = "README.md"
 license = "MIT"

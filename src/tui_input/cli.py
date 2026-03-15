@@ -12,7 +12,21 @@ def main(argv: list[str] | None = None) -> None:
     """Main entry point for the tui-input CLI."""
     parser = argparse.ArgumentParser(
         prog="tui-input",
-        description="A terminal companion that pins a persistent input bar at the bottom of tmux.",
+        usage="%(prog)s <command> [args ...]",
+        description=(
+            "Pin a persistent input bar at the bottom of tmux.\n"
+            "The command runs in the top pane; you type in the bottom."
+        ),
+        epilog=(
+            "examples:\n"
+            "  tui-input claude            Launch Claude Code with input bar\n"
+            "  tui-input vim file.py       Launch Vim with input bar\n"
+            "\n"
+            "tip:\n"
+            "  Register a shell alias to skip typing 'tui-input' every time:\n"
+            '    echo "alias claude=\'tui-input claude\'" >> ~/.zshrc'
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
         "-v",
@@ -23,7 +37,8 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument(
         "command",
         nargs=argparse.REMAINDER,
-        help="Command to run in the top pane (e.g., 'claude', 'codex', 'vim file.py')",
+        metavar="<command>",
+        help="command to run in the top pane (e.g. claude, codex, vim)",
     )
     parser.add_argument(
         "--companion",

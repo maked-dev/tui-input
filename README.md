@@ -48,6 +48,12 @@ When using TUI-based AI agents (Claude Code, Codex CLI, etc.), long outputs forc
 - Python 3.10+
 - tmux
 
+### Install via Homebrew
+
+```bash
+brew install maked-dev/tap/tui-input
+```
+
 ### Install via pip/uv
 
 ```bash
@@ -58,22 +64,16 @@ uv tool install tui-input
 pip install tui-input
 ```
 
-### One-liner (auto-detects agents + registers aliases)
+### After Installation: Add Alias
+
+Register a shell alias so you can launch your favorite AI agent with tui-input by just typing its name.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/maked-dev/tui-input/main/install.sh | bash
+echo "alias claude='tui-input claude'" >> ~/.zshrc && source ~/.zshrc
+echo "alias codex='tui-input codex'" >> ~/.zshrc && source ~/.zshrc
 ```
 
-This will:
-1. Install `tui-input`
-2. Detect installed agents (claude, codex, etc.)
-3. Register shell aliases so you can just type `claude` instead of `tui-input claude`
-
-To uninstall aliases:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/maked-dev/tui-input/main/install.sh | bash -s -- --uninstall
-```
+Now just type `claude` to launch Claude Code with the input bar attached.
 
 ## Usage
 
@@ -85,7 +85,7 @@ tui-input claude
 tui-input "vim file.py"
 tui-input htop
 
-# With aliases installed (via install.sh), just type the agent name
+# With alias registered, just type the agent name
 claude
 codex
 ```

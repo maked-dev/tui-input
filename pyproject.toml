@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tui-input"
+version = "0.1.0"
+description = "A terminal companion that pins a persistent input bar at the bottom of your tmux pane, so you can scroll freely through long TUI agent output while composing your response."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "maked-dev" }]
+keywords = ["tui", "terminal", "tmux", "claude", "codex", "agent", "input"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Terminals",
+    "Topic :: Utilities",
+]
+dependencies = ["textual>=0.85.0"]
+
+[project.scripts]
+tui-input = "tui_input.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/maked-dev/tui-input"
+Repository = "https://github.com/maked-dev/tui-input"
+Issues = "https://github.com/maked-dev/tui-input/issues"
+Changelog = "https://github.com/maked-dev/tui-input/blob/main/CHANGELOG.md"
+
+[dependency-groups]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.24", "pytest-cov>=6.0", "ruff>=0.8", "mypy>=1.13"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "A", "S", "SIM", "TCH", "PT"]
+ignore = [
+    "S603",   # subprocess calls with variable input — validated at CLI layer
+    "S606",   # os.execvp — command validated before use
+    "S607",   # partial executable path — intentional for tmux/pgrep/ps
+    "PT011",  # pytest.raises match — not always needed
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101", "S108"]  # assert and /tmp paths are expected in tests
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true

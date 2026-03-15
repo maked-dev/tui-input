@@ -1,0 +1,97 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill in as much detail as possible.
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      placeholder: "e.g., macOS 14.2, Ubuntu 24.04"
+    validations:
+      required: true
+
+  - type: input
+    id: terminal
+    attributes:
+      label: Terminal Emulator
+      placeholder: "e.g., iTerm2, Alacritty, WezTerm, Terminal.app"
+    validations:
+      required: true
+
+  - type: input
+    id: tmux-version
+    attributes:
+      label: tmux Version
+      description: "Output of `tmux -V`"
+      placeholder: "e.g., tmux 3.4"
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python Version
+      description: "Output of `python3 --version`"
+      placeholder: "e.g., Python 3.12.1"
+    validations:
+      required: true
+
+  - type: input
+    id: tui-input-version
+    attributes:
+      label: tui-input Version
+      description: "Output of `tui-input --version`"
+      placeholder: "e.g., tui-input 0.1.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How to reproduce the behavior.
+      value: |
+        1. Run `tui-input ...`
+        2. Type '...'
+        3. Press ...
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Screenshots
+      description: Any relevant logs or screenshots.
+    validations:
+      required: false

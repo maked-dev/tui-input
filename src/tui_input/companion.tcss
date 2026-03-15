@@ -1,0 +1,19 @@
+Screen {
+    layout: vertical;
+}
+
+#editor {
+    height: 1fr;
+    border: round $foreground 30%;
+}
+
+#editor:focus {
+    border: round $foreground 50%;
+}
+
+#stats {
+    height: 1;
+    text-align: right;
+    color: $text-muted;
+    padding: 0 1;
+}

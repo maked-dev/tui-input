@@ -12,7 +12,6 @@ from tui_input.tmux import (
     current_pane_id,
     in_tmux,
     pane_height,
-    resize_pane,
     set_hook,
     split_window,
 )
@@ -66,12 +65,6 @@ def _launch_inside_tmux(command: str, tui_input_bin: str, companion_base: str) -
 
     # Split current pane: companion goes to the bottom.
     companion_pane = split_window(height, companion_cmd)
-
-    # Force companion to the requested height — tmux may allocate fewer
-    # lines than requested when the terminal window is small.
-    actual = pane_height(companion_pane)
-    if actual < MIN_COMPANION_HEIGHT:
-        resize_pane(companion_pane, MIN_COMPANION_HEIGHT)
 
     # Register hook to fix layout when agent pane is split.
     fix_layout_cmd = (

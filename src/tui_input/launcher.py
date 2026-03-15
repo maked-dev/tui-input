@@ -11,14 +11,12 @@ from tui_input.tmux import (
     create_session_with_split,
     current_pane_id,
     in_tmux,
-    pane_height,
     set_hook,
     split_window,
 )
 
-COMPANION_HEIGHT = 9
 # border(2) + statusbar(1) + 3 input lines = 6
-MIN_COMPANION_HEIGHT = 6
+COMPANION_HEIGHT = 6
 SESSION_NAME = "tui-input"
 
 
@@ -44,27 +42,13 @@ def _find_tui_input_bin() -> str:
     return f"{sys.executable} -m tui_input"
 
 
-def _companion_height(pane_id: str) -> int:
-    """Pick companion height based on available space.
-
-    Uses COMPANION_HEIGHT when the terminal is large enough,
-    otherwise shrinks down to MIN_COMPANION_HEIGHT so the input
-    bar always shows at least 3 usable lines.
-    """
-    total = pane_height(pane_id)
-    # Reserve at least half for the agent pane
-    available = total // 2
-    return max(MIN_COMPANION_HEIGHT, min(COMPANION_HEIGHT, available))
-
-
 def _launch_inside_tmux(command: str, tui_input_bin: str, companion_base: str) -> None:
     """Split the current tmux pane and launch companion in the bottom."""
     top_pane = current_pane_id()
-    height = _companion_height(top_pane)
     companion_cmd = f"{companion_base} {top_pane}"
 
     # Split current pane: companion goes to the bottom.
-    companion_pane = split_window(height, companion_cmd)
+    companion_pane = split_window(COMPANION_HEIGHT, companion_cmd)
 
     # Register hook to fix layout when agent pane is split.
     fix_layout_cmd = (

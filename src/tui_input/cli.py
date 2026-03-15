@@ -118,7 +118,10 @@ def _run_companion(target_pane: str) -> None:
 def _fix_layout(agent_pane: str, companion_pane: str) -> None:
     """Rejoin companion pane below agent if layout was broken by a split."""
     from tui_input.launcher import COMPANION_HEIGHT
-    from tui_input.tmux import pane_width, rejoin_companion
+    from tui_input.tmux import pane_exists, pane_width, rejoin_companion
+
+    if not pane_exists(agent_pane) or not pane_exists(companion_pane):
+        return
 
     agent_w = pane_width(agent_pane)
     companion_w = pane_width(companion_pane)

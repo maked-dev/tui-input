@@ -10,6 +10,7 @@ from typing import TYPE_CHECKING, ClassVar
 
 from textual import on
 from textual.app import App, ComposeResult
+from textual.containers import Horizontal
 from textual.widgets import Static, TextArea
 
 from tui_input import __version__
@@ -360,7 +361,9 @@ class CompanionApp(App[None]):
 
     def compose(self) -> ComposeResult:
         yield InputArea(id="editor")
-        yield Static(f"tui-input {__version__}  ·  0 chars · 0 bytes · ~0 tokens", id="stats")
+        with Horizontal(id="statusbar"):
+            yield Static(f"tui-input {__version__}", id="version")
+            yield Static("0 chars · 0 bytes · ~0 tokens", id="stats")
 
     def on_mount(self) -> None:
         editor = self.query_one("#editor", InputArea)
@@ -395,7 +398,7 @@ class CompanionApp(App[None]):
         byte_count = len(text.encode("utf-8"))
         tokens = _estimate_tokens(text)
         stats = self.query_one("#stats", Static)
-        stats.update(f"tui-input {__version__}  ·  {chars} chars · {byte_count} bytes · ~{tokens} tokens")
+        stats.update(f"{chars} chars · {byte_count} bytes · ~{tokens} tokens")
 
     def _check_target_alive(self) -> None:
         """Check if the agent pane is still alive; exit if not.

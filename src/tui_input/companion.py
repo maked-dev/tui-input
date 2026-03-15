@@ -35,8 +35,8 @@ if TYPE_CHECKING:
 # Layout constants
 # ---------------------------------------------------------------------------
 
-MIN_HEIGHT = 7
-MAX_HEIGHT = 12
+MIN_HEIGHT = 9
+MAX_HEIGHT = 14
 PROCESS_CHECK_INTERVAL = 0.3
 
 # IME commit delay — short enough to be imperceptible, long enough for

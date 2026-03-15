@@ -15,7 +15,7 @@ from tui_input.tmux import (
     split_window,
 )
 
-COMPANION_HEIGHT = 7
+COMPANION_HEIGHT = 9
 SESSION_NAME = "tui-input"
 
 

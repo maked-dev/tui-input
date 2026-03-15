@@ -28,8 +28,9 @@ htmlcov/
 .DS_Store
 Thumbs.db
 
-# AI assistant
+# Local-only
 CLAUDE.md
+scripts/
 
 # IDE
 .idea/

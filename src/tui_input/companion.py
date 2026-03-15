@@ -35,8 +35,8 @@ if TYPE_CHECKING:
 # Layout constants
 # ---------------------------------------------------------------------------
 
-MIN_HEIGHT = 7
-MAX_HEIGHT = 12
+MIN_HEIGHT = 6
+MAX_HEIGHT = 14
 PROCESS_CHECK_INTERVAL = 0.3
 
 # IME commit delay — short enough to be imperceptible, long enough for
@@ -370,7 +370,17 @@ class CompanionApp(App[None]):
         editor.show_line_numbers = False
         editor.soft_wrap = True
         editor.tab_behavior = "indent"
+        self._ensure_minimum_height()
         self.set_interval(PROCESS_CHECK_INTERVAL, self._check_target_alive)
+
+    def _ensure_minimum_height(self) -> None:
+        """Force companion pane to MIN_HEIGHT if tmux allocated too few lines."""
+        if not self.companion_pane:
+            return
+        with contextlib.suppress(Exception):
+            current = pane_height(self.companion_pane)
+            if current < MIN_HEIGHT:
+                resize_pane(self.companion_pane, MIN_HEIGHT)
 
     def on_unmount(self) -> None:
         """Clean up tmux hook when companion exits."""

@@ -37,7 +37,7 @@ jobs:
       - uses: pypa/gh-action-pypi-publish@release/v1
 
   github-release:
-    needs: build
+    needs: pypi
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -53,7 +53,7 @@ jobs:
           generate_release_notes: true
 
   homebrew:
-    needs: build
+    needs: pypi
     runs-on: ubuntu-latest
     steps:
       - uses: mislav/bump-homebrew-formula-action@v3

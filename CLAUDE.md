@@ -36,7 +36,7 @@ history.py      JSON-based persistent input history
 
 ## Conventions
 
-- Language: code identifiers in English, comments/docs in English
+- Language: all code, comments, docs, commit messages, and PR descriptions in English. Korean is used only for direct conversation with the user.
 - All modules use `from __future__ import annotations`
 - Type hints on all function signatures; `mypy --strict` must pass
 - `contextlib.suppress(subprocess.CalledProcessError)` over bare `except Exception`

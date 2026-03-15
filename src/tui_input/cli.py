@@ -24,7 +24,7 @@ def main(argv: list[str] | None = None) -> None:
             "\n"
             "tip:\n"
             "  Register a shell alias to skip typing 'tui-input' every time:\n"
-            '    echo "alias claude=\'tui-input claude\'" >> ~/.zshrc'
+            "    echo \"alias claude='tui-input claude'\" >> ~/.zshrc"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
